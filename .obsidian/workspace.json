@@ -13,26 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "I/A-04每日记录/2026-04-01.md",
+                "file": "III/A-01万旻嘉/A-04写给她的/但我是个坏人，不会给你机会。.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-04-01"
-            }
-          },
-          {
-            "id": "b49f4f02570a5bc4",
-            "type": "leaf",
-            "state": {
-              "type": "webviewer",
-              "state": {
-                "url": "https://chat.deepseek.com/a/chat/s/e10afa51-0c61-4737-94c0-b938ed973fc0",
-                "title": "记账咨询与协助 - DeepSeek",
-                "mode": "webview"
-              },
-              "icon": "globe-2",
-              "title": "记账咨询与协助 - DeepSeek"
+              "title": "但我是个坏人，不会给你机会。"
             }
           },
           {
@@ -41,16 +27,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "I/A-04每日记录/2026-04-02.md",
+                "file": "I/A-02决策包/日常事务决策包.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "2026-04-02"
+              "title": "日常事务决策包"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -114,8 +99,7 @@
               "title": "Calendar"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       },
       {
         "id": "98fabd420a3cc962",
@@ -257,14 +241,20 @@
       "daily-notes:打开/创建今天的日记": false
     }
   },
-  "active": "afa836fa64eb95b6",
+  "active": "c59e0308ca350391",
   "lastOpenFiles": [
-    "I/A-04每日记录/2026-04-03.md",
+    "III/A-01万旻嘉/A-04写给她的",
+    "III/A-01万旻嘉/A-02她写的",
+    "III/A-01万旻嘉/A-01记忆",
+    "III/A-01万旻嘉/A-04写给她的/但我是个坏人，不会给你机会。.md",
     "I/A-04每日记录/2026-04-02.md",
+    "I/A-04每日记录/2026-04-03.md",
     "I/A-04每日记录/2026-04-01.md",
-    "I/A-02决策包/个人发展决策包.md",
-    "I/A-02决策包/日常事务决策包.md",
+    "IV/C语言技术/switch语句语法要求.md",
+    "IV/C语言技术",
     "欢迎回家.md",
+    "I/A-02决策包/日常事务决策包.md",
+    "I/A-02决策包/个人发展决策包.md",
     "I/A-04每日记录/2026-03-31.md",
     "I/物质界说明.md",
     "I/A-04每日记录.md",
@@ -288,12 +278,6 @@
     "III/A-01万旻嘉/A-04她写的",
     "III/A-01万旻嘉/A-03有关她的",
     "III/A-01万旻嘉/A-01记忆",
-    "III/A-01万旻嘉/A-02写给她的",
-    "III/A-01万旻嘉",
-    "IV/五界分类指南.md",
-    "I/A-01灵码异构科技",
-    "A-01灵码异构科技/浙江灵码异构网络科技有限公司股东协议.md",
-    "A-01灵码异构科技/浙江灵码异构网络科技有限公司章程.md",
-    "浙江灵码异构网络科技有限公司股东协议.md"
+    "IV/五界分类指南.md"
   ]
 }
