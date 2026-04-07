@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "III/A-01万旻嘉/A-04写给她的/A-02时刻.md",
+                "file": "自我重建.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "A-02时刻"
+              "title": "自我重建"
             }
           },
           {
@@ -62,9 +62,23 @@
               "icon": "lucide-file",
               "title": "2026-04-07"
             }
+          },
+          {
+            "id": "3c83ccc5e25ca9af",
+            "type": "leaf",
+            "state": {
+              "type": "webviewer",
+              "state": {
+                "url": "https://chat.deepseek.com/",
+                "title": "DeepSeek - 探索未至之境",
+                "mode": "webview"
+              },
+              "icon": "globe-2",
+              "title": "DeepSeek - 探索未至之境"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -128,8 +142,7 @@
               "title": "Calendar"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       },
       {
         "id": "98fabd420a3cc962",
@@ -271,13 +284,18 @@
       "daily-notes:打开/创建今天的日记": false
     }
   },
-  "active": "fcebc434461b05c0",
+  "active": "6bb6e9bdec4148bd",
   "lastOpenFiles": [
-    "I/A-04每日记录/2026-04-08.md",
-    "I/A-04每日记录/2026-04-07.md",
+    "V/梵的重生之旅.md",
+    "IV/A-03个人IP/梵离纱/梵离纱的重生之旅.md",
     "V/梵离纱的重生之旅.md",
-    "IV/A-02决策包/轻量决策包.md",
     "自我重建.md",
+    "III/A-01万旻嘉/A-04写给她的/A-02时刻.md",
+    "I/A-04每日记录/2026-04-07.md",
+    "I/A-04每日记录/2026-04-08.md",
+    "I/A-04每日记录/2026-04-10.md",
+    "I/A-04每日记录/2026-04-09.md",
+    "IV/A-02决策包/轻量决策包.md",
     "IV/A-02决策包/个人发展决策包.md",
     "IV/A-01精神笔记",
     "IV/A-02决策包/日常事务决策包.md",
@@ -297,12 +315,8 @@
     "2026-04-07.md",
     "欢迎回家.md",
     "I/A-04每日记录/2026-04-03.md",
-    "III/A-01万旻嘉/A-04写给她的/A-02时刻.md",
     "I/A-04每日记录/2026-04-04.md",
     "202604071622.md",
-    "I/A-04每日记录/2026-04-01.md",
-    "I/A-04每日记录/2026-04-02.md",
-    "话术.md",
     "III/A-01万旻嘉/A-04写给她的",
     "III/A-01万旻嘉/A-02她写的",
     "III/A-01万旻嘉/A-01记忆",
