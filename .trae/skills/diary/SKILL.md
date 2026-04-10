@@ -24,15 +24,20 @@ description: "写日记技能，管理待办、记账、财务分析和五界日
 
 ### 1. 日记文件管理
 
-日记存储在：`d:\shElter\shElter\A-04每日记录\YYYY-MM-DD.md`
+日记存储在：`d:\shElter\shElter\I\A-04每日记录\YYYY-MM-DD.md`
 
-每日日记结构：
+每日日记结构示例（不含 frontmatter 分隔符，避免转义冲突）：
+
+**待办事项格式：**
 ```
 ## 📋 待办事项 | To-Do List
 
 - [ ] 待办事项1
 - [x] 已完成事项
+```
 
+**财务记录格式：**
+```
 ## 💰 财务记录 | Financial Record
 
 ### 今日收支 | Today's Transactions
@@ -45,12 +50,28 @@ description: "写日记技能，管理待办、记账、财务分析和五界日
 - 今日盈余：XX元
 - 累计盈余：XX元
 - 可自由支配额度：XX,XXX元
+```
 
+**随笔和守护灵建议：**
+```
 ## ✍️ 随笔 | Personal Notes
 
 （保留用户原文，不做修改）
 
 ## 💡 守护灵建议 | Guardian Spirit Advice
+```
+
+---
+
+**实际日记文件的 frontmatter 格式应为：**
+```
+---
+标签:
+  - I
+  - 每日记录
+---
+
+（正文内容）
 ```
 
 ### 2. 记账规则
