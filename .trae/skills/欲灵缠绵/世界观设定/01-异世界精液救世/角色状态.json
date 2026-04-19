@@ -1,20 +1,19 @@
-
 {
   "lastUpdated": "2026-04-19",
-  "worldName": "异世界·精液救世",
+  "worldName": "艾尔西亚星球",
   "playerName": "李季栾",
-  "playerAlias": ["小公狗", "肉便器", "小肉便器"],
+  "playerAlias": ["小公狗", "肉便器", "净化者"],
 
   "basicStatus": {
     "level": 1,
-    "title": "实习种公",
+    "title": "实习净化使",
     "experience": 0,
     "experienceToNext": 1000
   },
 
   "vitalStats": {
     "semenAmount": 15,
-    "semenQuality": "普通（白色）",
+    "semenQuality": "D级（白色）",
     "dailySemenOutput": 100,
     "stamina": 100,
     "physical": 80,
@@ -30,22 +29,20 @@
   },
 
   "inventory": [
-    {"name": "润滑液", "quantity": 3, "effect": "肛交时必备"},
-    {"name": "增强剂", "quantity": 1, "effect": "一次射精量+50%"},
-    {"name": "持久环", "quantity": 1, "effect": "延长射精时间"}
+    {"name": "净化之证", "quantity": 1, "effect": "证明净化使身份"},
+    {"name": "基础治疗药水", "quantity": 3, "effect": "恢复50点体力"}
   ],
 
   "unlockedSkills": [
-    "基础插入",
-    "口交",
-    "肛交入门",
-    "乳交"
+    "基础发射",
+    "轻度净化"
   ],
 
   "worldProgress": {
-    "mainQuest": "第1天-第7天：拯救人类王国",
-    "currentQuest": "等待开始",
-    "completedQuests": []
+    "mainQuest": "拯救人类王国",
+    "currentQuest": "与女王会面",
+    "completedQuests": [],
+    "purificationProgress": 0
   },
 
   "relationships": {
@@ -56,5 +53,7 @@
   },
 
   "achievements": [],
-  "specialFlags": {}
+  "specialFlags": {
+    "chosenOne": true
+  }
 }
