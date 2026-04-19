@@ -1,0 +1,80 @@
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "地球",
+  "playerName": "李季栾",
+  "playerAlias": ["小公狗", "肉便器", "垃圾场探险家"],
+
+  "basicStatus": {
+    "level": 1,
+    "title": "流浪者",
+    "experience": 0,
+    "experienceToNext": 100
+  },
+
+  "vitalStats": {
+    "semenAmount": 15,
+    "semenQuality": "D级（白色）",
+    "dailySemenOutput": 100,
+    "stamina": 100,
+    "health": 100
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 10
+  },
+
+  "inventory": [
+    {"name": "破旧背包", "quantity": 1, "effect": "装垃圾用的"},
+    {"name": "手电筒", "quantity": 1, "effect": "垃圾场探险必备"}
+  ],
+
+  "money": {
+    "cash": 50,
+    "bank": 0,
+    "debt": 5000
+  },
+
+  "shipParts": [
+    {"name": "能源转换器", "rarity": "★★★", "found": false},
+    {"name": "跃迁引擎", "rarity": "★★★★★", "found": false},
+    {"name": "外壳板材", "rarity": "★★", "found": false},
+    {"name": "导航系统", "rarity": "★★★", "found": false},
+    {"name": "生命维持装置", "rarity": "★★★★", "found": false},
+    {"name": "通讯设备", "rarity": "★★", "found": false}
+  ],
+
+  "unlockedSkills": [
+    "垃圾场翻找",
+    "基础嘿咻"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "收集飞船零件，准备发射",
+    "currentQuest": "刚开始流浪",
+    "completedQuests": [],
+    "shameLevel": 0
+  },
+
+  "relationships": {
+    "垃圾场老板·老王": {"trust": 0, "status": "陌生"},
+    "神秘俱乐部妈妈·红姐": {"trust": 0, "status": "未接触"},
+    "便利店店长·小林": {"trust": 0, "status": "未接触"}
+  },
+
+  "jobs": {
+    "current": null,
+    "completed": [],
+    "dailyIncome": 0
+  },
+
+  "achievements": [],
+  "specialFlags": {
+    "inDebt": true,
+    "hasGirlfriend": true,
+    "buildingSpaceship": true
+  }
+}
