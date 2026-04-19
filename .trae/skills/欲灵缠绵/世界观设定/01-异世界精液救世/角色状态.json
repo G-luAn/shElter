@@ -1,0 +1,60 @@
+
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "异世界·精液救世",
+  "playerName": "李季栾",
+  "playerAlias": ["小公狗", "肉便器", "小肉便器"],
+
+  "basicStatus": {
+    "level": 1,
+    "title": "实习种公",
+    "experience": 0,
+    "experienceToNext": 1000
+  },
+
+  "vitalStats": {
+    "semenAmount": 15,
+    "semenQuality": "普通（白色）",
+    "dailySemenOutput": 100,
+    "stamina": 100,
+    "physical": 80,
+    "happiness": 3
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 10
+  },
+
+  "inventory": [
+    {"name": "润滑液", "quantity": 3, "effect": "肛交时必备"},
+    {"name": "增强剂", "quantity": 1, "effect": "一次射精量+50%"},
+    {"name": "持久环", "quantity": 1, "effect": "延长射精时间"}
+  ],
+
+  "unlockedSkills": [
+    "基础插入",
+    "口交",
+    "肛交入门",
+    "乳交"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "第1天-第7天：拯救人类王国",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "女王·莉莉丝": {"trust": 0, "status": "未接触"},
+    "精灵女祭司·艾露缇娅": {"trust": 0, "status": "未接触"},
+    "兽人大女战士·格力姆": {"trust": 0, "status": "未接触"},
+    "龙族女王·拉雯": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {}
+}

@@ -1,0 +1,57 @@
+
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "末世·射精发电",
+  "playerName": "李季栾",
+  "playerId": "GEN-0001",
+  "playerAlias": ["小公狗", "肉便器", "金色闪电"],
+
+  "basicStatus": {
+    "level": 1,
+    "rank": "D级 实习发电机",
+    "totalEarnings": 0,
+    "dailyQuota": 50
+  },
+
+  "vitalStats": {
+    "electricityGenerated": 0,
+    "semenAmount": 15,
+    "semenQuality": "普通（白色）",
+    "stamina": 100,
+    "physical": 80
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 10
+  },
+
+  "inventory": [
+    {"name": "标准采集器", "quantity": 1, "effect": "自动采集精液"},
+    {"name": "增强剂", "quantity": 1, "effect": "一次射精量+50%"},
+    {"name": "营养液", "quantity": 3, "effect": "恢复体力"}
+  ],
+
+  "unlockedSkills": [
+    "机器自动采集",
+    "基础手淫"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "日常发电",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "能源部长·玛格丽特": {"trust": 0, "status": "未接触"},
+    "科学部长·艾达": {"trust": 0, "status": "未接触"},
+    "娱乐部长·克拉拉": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {}
+}

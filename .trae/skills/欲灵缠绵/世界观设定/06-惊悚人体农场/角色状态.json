@@ -1,0 +1,64 @@
+# 惊悚·人体农场 - 角色状态
+
+```json
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "惊悚·人体农场",
+  "playerName": "李季栾",
+  "playerId": "S-007",
+  "playerAlias": ["小公狗", "肉便器", "完美实验体"],
+
+  "basicStatus": {
+    "level": 1,
+    "rank": "S级 完美实验体",
+    "experience": 0,
+    "experienceToNext": 1000
+  },
+
+  "vitalStats": {
+    "semenAmount": 15,
+    "semenQuality": "彩虹色（特殊）",
+    "dailySemenOutput": 100,
+    "stamina": 100,
+    "physical": 80,
+    "mentalState": 100
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 10
+  },
+
+  "inventory": [
+    {"name": "实验体手环", "quantity": 1, "effect": "追踪定位"},
+    {"name": "标准囚服", "quantity": 1, "effect": "农场统一服装"},
+    {"name": "营养液", "quantity": 3, "effect": "恢复体力"}
+  ],
+
+  "unlockedSkills": [
+    "机器自动采集",
+    "基础体检配合"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "日常采集任务",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "博士": {"trust": 0, "status": "观察中"},
+    "护士长·玫瑰": {"trust": 0, "status": "每日接触"},
+    "女研究员·小雪": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {
+    "memoryWiped": true,
+    "trueIdentity": "unknown"
+  }
+}
+```

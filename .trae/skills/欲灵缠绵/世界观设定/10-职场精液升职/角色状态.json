@@ -1,0 +1,63 @@
+# 职场·精液升职 - 角色状态
+
+```json
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "职场·精液升职",
+  "playerName": "李季栾",
+  "playerId": "EMP-00001",
+  "playerAlias": ["小公狗", "肉便器", "新员工"],
+
+  "basicStatus": {
+    "level": 1,
+    "position": "实习生",
+    "department": "采集部",
+    "experience": 0,
+    "experienceToNext": 1000
+  },
+
+  "vitalStats": {
+    "semenAmount": 15,
+    "semenQuality": "普通（白色）",
+    "dailyQuota": 50,
+    "stamina": 100,
+    "physical": 80
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 12
+  },
+
+  "inventory": [
+    {"name": "员工手册", "quantity": 1, "effect": "记载公司规则"},
+    {"name": "员工卡", "quantity": 1, "effect": "出入证明"},
+    {"name": "标准采集杯", "quantity": 1, "effect": "用于采集精液"}
+  ],
+
+  "unlockedSkills": [
+    "基础采集",
+    "公司规则"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "实习生生活：适应公司的规则和文化",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "营业部女部长·杉本美子": {"trust": 0, "status": "未接触"},
+    "采集部女主管·小野丽莎": {"trust": 0, "status": "未接触"},
+    "会长·御手洗雅子": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {
+    "secretIdentity": "竞争对手公司卧底"
+  }
+}
+```

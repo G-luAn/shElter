@@ -1,0 +1,60 @@
+# 魔法学园·精液修炼 - 角色状态
+
+```json
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "魔法学园·精液修炼",
+  "playerName": "李季栾",
+  "playerAlias": ["小公狗", "肉便器", "彩虹天才"],
+
+  "basicStatus": {
+    "level": 1,
+    "title": "见实习精液使",
+    "experience": 0,
+    "experienceToNext": 1000
+  },
+
+  "vitalStats": {
+    "semenAmount": 15,
+    "semenQuality": "彩虹色（特殊体质）",
+    "dailySemenOutput": 100,
+    "stamina": 100,
+    "physical": 80
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 15
+  },
+
+  "inventory": [
+    {"name": "学生手册", "quantity": 1, "effect": "记载学院规则"},
+    {"name": "魔法长袍", "quantity": 1, "effect": "标准学生装备"},
+    {"name": "初级魔杖", "quantity": 1, "effect": "用于发射精液魔法"}
+  ],
+
+  "unlockedSkills": [
+    "基础释放",
+    "精液护盾（初级）"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "新生训练：学习基础释放魔法",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "院长·艾琳娜": {"trust": 0, "status": "导师（未接触）"},
+    "教授·迪丽雅": {"trust": 0, "status": "未接触"},
+    "教授·海伦娜": {"trust": 0, "status": "未接触"},
+    "教授·卡蜜拉": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {}
+}
+```

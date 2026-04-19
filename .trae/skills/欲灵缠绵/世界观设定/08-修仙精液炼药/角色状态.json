@@ -1,0 +1,61 @@
+# 修仙·精液炼药 - 角色状态
+
+```json
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "修仙·精液炼药",
+  "playerName": "李季栾",
+  "playerAlias": ["小公狗", "肉便器", "元阳之体"],
+
+  "basicStatus": {
+    "level": 1,
+    "realm": "炼气期",
+    "experience": 0,
+    "experienceToNext": 1000
+  },
+
+  "vitalStats": {
+    "semenAmount": 15,
+    "semenQuality": "元阳精华（特殊体质）",
+    "dailySemenOutput": 100,
+    "stamina": 100,
+    "physical": 80,
+    "qi": 50
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 15
+  },
+
+  "inventory": [
+    {"name": "基础功法", "quantity": 1, "effect": "炼气期入门功法"},
+    {"name": "布衣", "quantity": 1, "effect": "普通修仙者服装"},
+    {"name": "储物袋", "quantity": 1, "effect": "可以存放物品"}
+  ],
+
+  "unlockedSkills": [
+    "基础炼气功法",
+    "元阳感应"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "逃亡之路：被合欢派追杀",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "合欢派掌门·阴姬": {"trust": -50, "status": "追杀中"},
+    "青云门大师姐·清莲": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {
+    "yuanYangBody": true
+  }
+}
+```

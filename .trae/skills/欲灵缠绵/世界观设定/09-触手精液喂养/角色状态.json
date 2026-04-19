@@ -1,0 +1,58 @@
+# 触手·精液喂养 - 角色状态
+
+```json
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "触手·精液喂养",
+  "playerName": "李季栾",
+  "playerAlias": ["小公狗", "肉便器", "储备种公"],
+
+  "basicStatus": {
+    "level": 1,
+    "title": "储备种公",
+    "experience": 0,
+    "experienceToNext": 1000
+  },
+
+  "vitalStats": {
+    "semenAmount": 15,
+    "semenQuality": "普通（白色）",
+    "dailySemenOutput": 100,
+    "stamina": 100,
+    "physical": 80
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 10
+  },
+
+  "inventory": [
+    {"name": "触怪标记", "quantity": 1, "effect": "证明是触手岛的居民"},
+    {"name": "海水净化器", "quantity": 1, "effect": "在岛上生存必需品"},
+    {"name": "催情粘液抗体", "quantity": 3, "effect": "抵抗催情粘液"}
+  ],
+
+  "unlockedSkills": [
+    "触手感知",
+    "水下呼吸（弱）"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "初到岛上：被触手抓住，开始在岛上生存",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "触怪女王": {"trust": 0, "status": "观察中"},
+    "美人鱼触怪·塞壬": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {}
+}
+```

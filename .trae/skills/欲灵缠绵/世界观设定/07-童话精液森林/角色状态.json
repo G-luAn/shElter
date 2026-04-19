@@ -1,0 +1,60 @@
+# 童话·精液森林 - 角色状态
+
+```json
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "童话·精液森林",
+  "playerName": "李季栾",
+  "playerAlias": ["小公狗", "肉便器", "森林英雄"],
+
+  "basicStatus": {
+    "level": 1,
+    "title": "被选中的英雄",
+    "experience": 0,
+    "experienceToNext": 1000
+  },
+
+  "vitalStats": {
+    "semenAmount": 15,
+    "semenQuality": "普通（白色）",
+    "dailySemenOutput": 100,
+    "stamina": 100,
+    "physical": 80
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 12,
+    "智力": 10
+  },
+
+  "inventory": [
+    {"name": "祈福之杖", "quantity": 1, "effect": "将精液转化为魔力的法杖"},
+    {"name": "祈福圣杯", "quantity": 1, "effect": "收集和储存精液的容器"},
+    {"name": "英雄斗篷", "quantity": 1, "effect": "标准的英雄装备"}
+  ],
+
+  "unlockedSkills": [
+    "轻度祈福",
+    "花朵祈福"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "花之领域：解救被诅咒的花朵精灵",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "白雪公主": {"trust": 0, "status": "封印中"},
+    "睡美人": {"trust": 0, "status": "沉睡中"},
+    "小红帽": {"trust": 0, "status": "未接触"},
+    "人鱼公主": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {}
+}
+```

@@ -1,0 +1,60 @@
+# 赛博朋克·数据精液 - 角色状态
+
+```json
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "赛博朋克·数据精液",
+  "playerName": "李季栾",
+  "playerId": "S-001",
+  "playerAlias": ["小公狗", "肉便器", "金色闪电"],
+
+  "basicStatus": {
+    "level": 1,
+    "rank": "S级 精液矿工",
+    "totalEarnings": 0,
+    "dailyQuota": 100
+  },
+
+  "vitalStats": {
+    "walletBalance": 0,
+    "semenAmount": 15,
+    "semenQuality": "S级（彩虹）",
+    "stamina": 100,
+    "physical": 80
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 12
+  },
+
+  "inventory": [
+    {"name": "性高潮同步器", "quantity": 1, "effect": "最新型采集设备"},
+    {"name": "SEED钱包", "quantity": 1, "effect": "储存SEED Coin"},
+    {"name": "防火墙芯片", "quantity": 1, "effect": "防止黑客攻击"}
+  ],
+
+  "unlockedSkills": [
+    "机器自动采集",
+    "虚拟现实挖矿",
+    "基础黑客防御"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "日常挖矿任务",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "黑客女王·零": {"trust": 0, "status": "敌对/未知"},
+    "商务会长·维多利亚": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {}
+}
+```

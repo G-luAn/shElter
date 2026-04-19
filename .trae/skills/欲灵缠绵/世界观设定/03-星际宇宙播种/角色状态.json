@@ -1,0 +1,61 @@
+# 星际·宇宙播种 - 角色状态
+
+```json
+{
+  "lastUpdated": "2026-04-19",
+  "worldName": "星际·宇宙播种",
+  "playerName": "李季栾",
+  "playerId": "GEN-0001",
+  "playerAlias": ["小公狗", "肉便器", "金色闪电"],
+
+  "basicStatus": {
+    "level": 1,
+    "rank": "S级 宇宙播种者",
+    "experience": 0,
+    "experienceToNext": 1000
+  },
+
+  "vitalStats": {
+    "semenAmount": 15,
+    "semenQuality": "普通（白色）",
+    "dailySemenOutput": 100,
+    "stamina": 100,
+    "physical": 80
+  },
+
+  "attributes": {
+    "strength": 10,
+    "体力": 10,
+    "速度": 10,
+    "魅力": 10,
+    "智力": 10
+  },
+
+  "inventory": [
+    {"name": "高速穿梭器", "quantity": 1, "effect": "可在银河系内跳跃飞行"},
+    {"name": "采集器", "quantity": 1, "effect": "自动分析精液数据"},
+    {"name": "基因稳定剂", "quantity": 2, "effect": "提高精液品质"}
+  ],
+
+  "unlockedSkills": [
+    "基础播种",
+    "飞船驾驶",
+    "星际导航"
+  ],
+
+  "worldProgress": {
+    "mainQuest": "新手任务：改造荒芜小行星",
+    "currentQuest": "等待开始",
+    "completedQuests": []
+  },
+
+  "relationships": {
+    "联邦总统·维多利亚": {"trust": 0, "status": "未接触"},
+    "虫族女王·扎拉丝": {"trust": 0, "status": "未接触"},
+    "AI女王·阿尔法": {"trust": 0, "status": "未接触"}
+  },
+
+  "achievements": [],
+  "specialFlags": {}
+}
+```
