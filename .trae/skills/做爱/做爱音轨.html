@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>多轨序列循环器 Pro | 无限音轨 · 组内顺序循环 · 自动保存</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: #0a0f16;
+            font-family: 'Segoe UI', 'Inter', system-ui, sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .app {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* 顶部栏 */
+        .top-bar {
+            background: rgba(20, 28, 38, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 1.5rem;
+            padding: 0.8rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border: 1px solid rgba(72, 120, 148, 0.3);
+        }
+
+        .title h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+            color: #eef5ff;
+        }
+
+        .title small {
+            font-size: 0.7rem;
+            color: #8aaec9;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: #1e3a4a;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 40px;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .btn:hover {
+            background: #2e5a6e;
+            transform: scale(0.97);
+        }
+
+        .btn-primary {
+            background: #2a5f7a;
+        }
+
+        .btn-danger {
+            background: #632c3c;
+        }
+
+        .btn-success {
+            background: #2a6e4a;
+        }
+
+        /* 音轨容器 */
+        .tracks-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .tracks-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .tracks-container::-webkit-scrollbar-track {
+            background: #1a222c;
+            border-radius: 10px;
+        }
+
+        .tracks-container::-webkit-scrollbar-thumb {
+            background: #3a5a74;
+            border-radius: 10px;
+        }
+
+        /* 单个音轨卡片 */
+        .track-card {
+            background: rgba(18, 26, 34, 0.9);
+            border-radius: 1.2rem;
+            border: 1px solid rgba(72, 120, 148, 0.4);
+            overflow: hidden;
+        }
+
+        .track-header {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .track-title {
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 140px;
+        }
+
+        .track-title input {
+            background: #1a2a36;
+            border: 1px solid #3a5a74;
+            color: white;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            width: 120px;
+        }
+
+        .track-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            flex: 1;
+        }
+
+        .track-btn {
+            background: #1f3e4c;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 32px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .track-volume {
+            width: 90px;
+            accent-color: #3b82f6;
+        }
+
+        .delete-track {
+            background: #592c38;
+        }
+
+        /* 片段列表 - 水平滚动 */
+        .clips-scroll {
+            overflow-x: auto;
+            padding: 12px 16px;
+            display: flex;
+            gap: 10px;
+            min-height: 110px;
+        }
+
+        .clips-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .clip-item {
+            background: #1e2e3a;
+            border-radius: 0.8rem;
+            padding: 8px 12px;
+            min-width: 160px;
+            width: 160px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            cursor: grab;
+            border: 1px solid #3a6070;
+        }
+
+        .clip-item:active {
+            cursor: grabbing;
+        }
+
+        .clip-item.drag-over {
+            border: 2px solid #3b82f6;
+            background: #2a4a5a;
+        }
+
+        .clip-name {
+            font-size: 0.7rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #cde4ff;
+            text-align: center;
+        }
+
+        .clip-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 6px;
+        }
+
+        .clip-volume {
+            width: 60px;
+            accent-color: #10b981;
+        }
+
+        .clip-remove {
+            background: #592c38;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 24px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+
+        .drag-handle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #7a9cbd;
+            cursor: grab;
+        }
+
+        .empty-clips {
+            padding: 20px;
+            text-align: center;
+            color: #6a8eb0;
+            font-size: 0.8rem;
+            width: 100%;
+        }
+
+        /* 底部栏 */
+        .global-bar {
+            background: rgba(20, 28, 38, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: 2rem;
+            padding: 10px 20px;
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .status {
+            font-family: monospace;
+            font-size: 0.75rem;
+            color: #9bc0df;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #5a7e9c;
+            margin-top: 18px;
+        }
+
+        @media (max-width: 800px) {
+            .track-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <div class="top-bar">
+        <div class="title">
+            <h1>🎚️ 多轨序列循环器 Pro <small>无限音轨 · 组内顺序循环 · 自动保存</small></h1>
+        </div>
+        <div class="toolbar">
+            <label class="btn btn-primary" id="addToSelectedLabel">📁 添加到当前轨
+                <input type="file" id="globalFileInput" accept="audio/mpeg, .mp3, .wav, .ogg" multiple style="display:none">
+            </label>
+            <button class="btn btn-success" id="addTrackBtn">➕ 新增音轨</button>
+            <button class="btn" id="playAllBtn">▶ 全部播放</button>
+            <button class="btn" id="pauseAllBtn">⏸️ 全部暂停</button>
+            <button class="btn btn-danger" id="clearAllBtn">🗑️ 清空全部</button>
+        </div>
+    </div>
+
+    <div id="tracksContainer" class="tracks-container"></div>
+
+    <div class="global-bar">
+        <div class="status" id="statusText">💾 自动保存已启用 | 所有音频存储在本地</div>
+        <div class="toolbar">
+            <button class="btn" id="muteAllBtn">🔇 全局静音</button>
+            <button class="btn" id="unmuteAllBtn">🔊 取消静音</button>
+        </div>
+    </div>
+    <footer>💡 说明：每个音轨内的音频会按顺序依次播放 → 播完最后一个回到第一个循环。不同音轨之间同时播放。<br>
+    🎚️ 拖拽 ⋮⋮ 手柄可调整组内顺序 | 每个音频独立音量 | 音轨音量控制整组增益 | ✨ 所有内容自动保存，刷新页面恢复</footer>
+</div>
+
+<script>
+    // ======================= 多轨序列循环引擎 + IndexedDB 持久化 =======================
+    const DB_NAME = 'MultiTrackSeqPro';
+    const DB_VERSION = 4;
+    const STORE_FILES = 'audioFiles';
+    const STORE_PROJECT = 'projectState';
+
+    let db = null;
+    let tracks = [];           // TrackGroup 实例数组
+    let nextTrackId = 1;
+    let selectedTrackIndex = 0;   // 当前选中用于添加文件的音轨索引
+    let isRestoring = false;
+
+    // ---------- AudioClip 类 ----------
+    class AudioClip {
+        constructor(fileId, name, blobUrl, audio, volume = 0.7) {
+            this.fileId = fileId;
+            this.name = name;
+            this.blobUrl = blobUrl;
+            this.audio = audio;
+            this.volume = volume;
+            this.audio.volume = volume;
+            this.audio.loop = false;
+            this._endHandler = null;
+        }
+
+        setVolume(vol) {
+            this.volume = Math.max(0, Math.min(1, vol));
+            this.audio.volume = this.volume;
+        }
+
+        play() { return this.audio.play(); }
+        pause() { this.audio.pause(); }
+        stop() { this.audio.pause(); this.audio.currentTime = 0; }
+        isPlaying() { return !this.audio.paused; }
+    }
+
+    // ---------- TrackGroup 类 ----------
+    class TrackGroup {
+        constructor(id, name = '新音轨', groupVolume = 0.7, muted = false) {
+            this.id = id;
+            this.name = name;
+            this.clips = [];
+            this.currentIndex = 0;
+            this.isPlaying = false;
+            this.groupVolume = groupVolume;
+            this.muted = muted;
+        }
+
+        addClip(clip) {
+            this.clips.push(clip);
+            this._applyGroupVolumeToClip(clip);
+            return clip;
+        }
+
+        insertClipAtIndex(clip, index) {
+            this.clips.splice(index, 0, clip);
+            this._applyGroupVolumeToClip(clip);
+        }
+
+        removeClip(index) {
+            if (index < 0 || index >= this.clips.length) return;
+            const clip = this.clips[index];
+            if (clip._endHandler && clip.audio) {
+                clip.audio.removeEventListener('ended', clip._endHandler);
+            }
+            if (clip.blobUrl) URL.revokeObjectURL(clip.blobUrl);
+            this.clips.splice(index, 1);
+            if (this.isPlaying) {
+                if (this.clips.length === 0) {
+                    this.isPlaying = false;
+                } else {
+                    if (index === this.currentIndex) {
+                        this.currentIndex = this.currentIndex % this.clips.length;
+                    } else if (index < this.currentIndex) {
+                        this.currentIndex--;
+                    }
+                    this.stop();
+                    this.start();
+                }
+            }
+        }
+
+        _applyGroupVolumeToClip(clip) {
+            const factor = this.muted ? 0 : this.groupVolume;
+            clip.audio.volume = clip.volume * factor;
+        }
+
+        applyGroupVolume() {
+            const factor = this.muted ? 0 : this.groupVolume;
+            for (let clip of this.clips) {
+                clip.audio.volume = clip.volume * factor;
+            }
+        }
+
+        setGroupVolume(vol) {
+            this.groupVolume = Math.max(0, Math.min(1, vol));
+            this.applyGroupVolume();
+        }
+
+        setMuted(muted) {
+            this.muted = muted;
+            this.applyGroupVolume();
+        }
+
+        start() {
+            if (this.clips.length === 0) return;
+            this.isPlaying = true;
+            this._playCurrentClip();
+        }
+
+        _playCurrentClip() {
+            if (!this.isPlaying || this.clips.length === 0) return;
+            const currentClip = this.clips[this.currentIndex];
+            if (!currentClip) return;
+
+            if (currentClip._endHandler) {
+                currentClip.audio.removeEventListener('ended', currentClip._endHandler);
+            }
+
+            const onEnded = () => {
+                this.currentIndex = (this.currentIndex + 1) % this.clips.length;
+                if (this.isPlaying) {
+                    this._playCurrentClip();
+                }
+            };
+            currentClip._endHandler = onEnded;
+            currentClip.audio.addEventListener('ended', onEnded);
+
+            const factor = this.muted ? 0 : this.groupVolume;
+            currentClip.audio.volume = currentClip.volume * factor;
+            currentClip.play().catch(e => {
+                console.warn(`音轨 "${this.name}" 播放失败:`, e);
+                if (this.isPlaying) {
+                    setTimeout(() => {
+                        this.currentIndex = (this.currentIndex + 1) % this.clips.length;
+                        this._playCurrentClip();
+                    }, 100);
+                }
+            });
+        }
+
+        pause() {
+            this.isPlaying = false;
+            if (this.clips[this.currentIndex]) {
+                const clip = this.clips[this.currentIndex];
+                clip.pause();
+                if (clip._endHandler) {
+                    clip.audio.removeEventListener('ended', clip._endHandler);
+                    clip._endHandler = null;
+                }
+            }
+        }
+
+        stop() {
+            this.pause();
+            this.currentIndex = 0;
+            for (let clip of this.clips) {
+                clip.stop();
+            }
+        }
+
+        reorderClips(fromIndex, toIndex) {
+            if (fromIndex === toIndex) return;
+            const [moved] = this.clips.splice(fromIndex, 1);
+            this.clips.splice(toIndex, 0, moved);
+            if (this.isPlaying) {
+                this.stop();
+                this.start();
+            }
+        }
+
+        getAllBlobUrls() {
+            return this.clips.map(c => c.blobUrl);
+        }
+    }
+
+    // ---------- IndexedDB 操作 ----------
+    function openDB() {
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+            request.onerror = () => reject(request.error);
+            request.onsuccess = () => {
+                db = request.result;
+                resolve(db);
+            };
+            request.onupgradeneeded = (event) => {
+                const dbRef = event.target.result;
+                if (!dbRef.objectStoreNames.contains(STORE_FILES)) {
+                    dbRef.createObjectStore(STORE_FILES, { keyPath: 'id' });
+                }
+                if (!dbRef.objectStoreNames.contains(STORE_PROJECT)) {
+                    dbRef.createObjectStore(STORE_PROJECT, { keyPath: 'key' });
+                }
+            };
+        });
+    }
+
+    async function saveFileToDB(file, customId = null) {
+        const fileId = customId || `file_${Date.now()}_${Math.random().toString(36)}`;
+        const arrayBuffer = await new Promise((res, rej) => {
+            const fr = new FileReader();
+            fr.onload = () => res(fr.result);
+            fr.onerror = rej;
+            fr.readAsArrayBuffer(file);
+        });
+        const transaction = db.transaction([STORE_FILES], 'readwrite');
+        const store = transaction.objectStore(STORE_FILES);
+        await new Promise((res, rej) => {
+            const req = store.put({ id: fileId, name: file.name, type: file.type, data: arrayBuffer });
+            req.onsuccess = res;
+            req.onerror = rej;
+        });
+        return fileId;
+    }
+
+    async function loadFileFromDB(fileId) {
+        return new Promise((res, rej) => {
+            const transaction = db.transaction([STORE_FILES], 'readonly');
+            const store = transaction.objectStore(STORE_FILES);
+            const req = store.get(fileId);
+            req.onsuccess = () => {
+                const record = req.result;
+                if (record && record.data) {
+                    const blob = new Blob([record.data], { type: record.type || 'audio/mpeg' });
+                    const url = URL.createObjectURL(blob);
+                    res({ url, name: record.name });
+                } else { rej(new Error('file not found')); }
+            };
+            req.onerror = rej;
+        });
+    }
+
+    async function deleteFileFromDB(fileId) {
+        const transaction = db.transaction([STORE_FILES], 'readwrite');
+        const store = transaction.objectStore(STORE_FILES);
+        await new Promise((res, rej) => {
+            const req = store.delete(fileId);
+            req.onsuccess = res;
+            req.onerror = rej;
+        });
+    }
+
+    async function saveProjectToDB() {
+        if (!db || isRestoring) return;
+        const projectData = {
+            tracks: tracks.map(t => ({
+                id: t.id,
+                name: t.name,
+                groupVolume: t.groupVolume,
+                muted: t.muted,
+                clips: t.clips.map(c => ({
+                    fileId: c.fileId,
+                    name: c.name,
+                    volume: c.volume
+                }))
+            }))
+        };
+        const transaction = db.transaction([STORE_PROJECT], 'readwrite');
+        const store = transaction.objectStore(STORE_PROJECT);
+        await new Promise((res, rej) => {
+            const req = store.put({ key: 'project', value: projectData });
+            req.onsuccess = res;
+            req.onerror = rej;
+        });
+        updateStatus('💾 已自动保存');
+    }
+
+    async function loadProjectFromDB() {
+        if (!db) return null;
+        return new Promise((res, rej) => {
+            const transaction = db.transaction([STORE_PROJECT], 'readonly');
+            const store = transaction.objectStore(STORE_PROJECT);
+            const req = store.get('project');
+            req.onsuccess = () => res(req.result?.value || null);
+            req.onerror = rej;
+        });
+    }
+
+    // 恢复整个项目
+    async function restoreFullProject() {
+        isRestoring = true;
+        const project = await loadProjectFromDB();
+        if (!project || !project.tracks || project.tracks.length === 0) {
+            // 创建一个默认音轨
+            const defaultTrack = new TrackGroup(nextTrackId++, '音轨 1', 0.7, false);
+            tracks.push(defaultTrack);
+            isRestoring = false;
+            renderAllTracks();
+            await saveProjectToDB();
+            return;
+        }
+
+        for (let tData of project.tracks) {
+            const track = new TrackGroup(tData.id, tData.name, tData.groupVolume, tData.muted);
+            if (tData.id >= nextTrackId) nextTrackId = tData.id + 1;
+            
+            for (let clipData of tData.clips) {
+                try {
+                    const { url, name } = await loadFileFromDB(clipData.fileId);
+                    const audio = new Audio(url);
+                    audio.loop = false;
+                    const clip = new AudioClip(clipData.fileId, name, url, audio, clipData.volume);
+                    track.addClip(clip);
+                } catch(e) { console.warn('恢复片段失败:', clipData.name, e); }
+            }
+            tracks.push(track);
+        }
+        
+        if (tracks.length === 0) {
+            const defaultTrack = new TrackGroup(nextTrackId++, '音轨 1', 0.7, false);
+            tracks.push(defaultTrack);
+        }
+        
+        isRestoring = false;
+        renderAllTracks();
+    }
+
+    // ---------- 添加音频文件 ----------
+    async function addFilesToTrack(trackIndex, files) {
+        if (!files.length) return;
+        const track = tracks[trackIndex];
+        if (!track) return;
+        
+        for (let file of files) {
+            if (!file.type.includes('audio')) continue;
+            const fileId = `file_${Date.now()}_${Math.random().toString(36)}`;
+            await saveFileToDB(file, fileId);
+            const blobUrl = URL.createObjectURL(file);
+            const audio = new Audio(blobUrl);
+            audio.loop = false;
+            const clip = new AudioClip(fileId, file.name, blobUrl, audio, 0.7);
+            track.addClip(clip);
+        }
+        
+        renderTrackClips(trackIndex);
+        if (!track.isPlaying && track.clips.length > 0) {
+            track.start();
+        }
+        await saveProjectToDB();
+    }
+
+    // ---------- UI 渲染 ----------
+    function renderAllTracks() {
+        const container = document.getElementById('tracksContainer');
+        if (!container) return;
+        container.innerHTML = '';
+        for (let i = 0; i < tracks.length; i++) {
+            const track = tracks[i];
+            const trackDiv = document.createElement('div');
+            trackDiv.className = 'track-card';
+            trackDiv.setAttribute('data-track-index', i);
+            
+            // 头部
+            trackDiv.innerHTML = `
+                <div class="track-header">
+                    <div class="track-title">
+                        <span>🎧</span>
+                        <input type="text" class="track-name-input" value="${escapeHtml(track.name)}" data-track="${i}">
+                    </div>
+                    <div class="track-controls">
+                        <button class="track-btn play-pause-track" data-track="${i}">${track.isPlaying ? '⏸️' : '▶️'}</button>
+                        <button class="track-btn stop-track" data-track="${i}">⏹️</button>
+                        <input type="range" class="track-volume" data-track="${i}" min="0" max="100" value="${track.groupVolume * 100}" step="1" style="width:90px">
+                        <button class="track-btn track-mute" data-track="${i}">${track.muted ? '🔊' : '🔇'}</button>
+                        <button class="track-btn delete-track" data-track="${i}">🗑️</button>
+                    </div>
+                </div>
+                <div class="clips-scroll" id="clipsScroll_${i}"></div>
+            `;
+            container.appendChild(trackDiv);
+            renderTrackClips(i);
+        }
+        attachGlobalEvents();
+        updateStatus();
+    }
+
+    function renderTrackClips(trackIndex) {
+        const track = tracks[trackIndex];
+        const scrollContainer = document.getElementById(`clipsScroll_${trackIndex}`);
+        if (!scrollContainer) return;
+        
+        if (track.clips.length === 0) {
+            scrollContainer.innerHTML = `<div class="empty-clips">🎵 拖拽音频至此，或点击「添加到当前轨」</div>`;
+            return;
+        }
+        
+        scrollContainer.innerHTML = '';
+        for (let cIdx = 0; cIdx < track.clips.length; cIdx++) {
+            const clip = track.clips[cIdx];
+            const clipDiv = document.createElement('div');
+            clipDiv.className = 'clip-item';
+            clipDiv.setAttribute('draggable', 'true');
+            clipDiv.setAttribute('data-track', trackIndex);
+            clipDiv.setAttribute('data-clip-idx', cIdx);
+            clipDiv.innerHTML = `
+                <div class="drag-handle">⋮⋮</div>
+                <div class="clip-name" title="${escapeHtml(clip.name)}">${escapeHtml(clip.name.length > 20 ? clip.name.slice(0,18)+'...' : clip.name)}</div>
+                <div class="clip-controls">
+                    <input type="range" class="clip-volume" data-track="${trackIndex}" data-clip="${cIdx}" min="0" max="100" value="${clip.volume * 100}" step="1" style="width:60px">
+                    <button class="clip-remove" data-track="${trackIndex}" data-clip="${cIdx}">✖</button>
+                </div>
+            `;
+            scrollContainer.appendChild(clipDiv);
+        }
+        attachClipEvents(trackIndex);
+        attachDragEventsForTrack(trackIndex);
+    }
+
+    // 事件绑定
+    function attachGlobalEvents() {
+        // 音轨名称编辑
+        document.querySelectorAll('.track-name-input').forEach(input => {
+            input.removeEventListener('change', renameTrackHandler);
+            input.addEventListener('change', renameTrackHandler);
+        });
+        // 播放/暂停
+        document.querySelectorAll('.play-pause-track').forEach(btn => {
+            btn.removeEventListener('click', trackPlayPauseHandler);
+            btn.addEventListener('click', trackPlayPauseHandler);
+        });
+        document.querySelectorAll('.stop-track').forEach(btn => {
+            btn.removeEventListener('click', trackStopHandler);
+            btn.addEventListener('click', trackStopHandler);
+        });
+        document.querySelectorAll('.track-volume').forEach(slider => {
+            slider.removeEventListener('input', trackVolumeHandler);
+            slider.addEventListener('input', trackVolumeHandler);
+        });
+        document.querySelectorAll('.track-mute').forEach(btn => {
+            btn.removeEventListener('click', trackMuteHandler);
+            btn.addEventListener('click', trackMuteHandler);
+        });
+        document.querySelectorAll('.delete-track').forEach(btn => {
+            btn.removeEventListener('click', deleteTrackHandler);
+            btn.addEventListener('click', deleteTrackHandler);
+        });
+    }
+
+    function renameTrackHandler(e) {
+        const trackIdx = parseInt(e.target.getAttribute('data-track'));
+        if (tracks[trackIdx]) {
+            tracks[trackIdx].name = e.target.value;
+            saveProjectToDB();
+        }
+    }
+
+    function trackPlayPauseHandler(e) {
+        const trackIdx = parseInt(e.currentTarget.getAttribute('data-track'));
+        const track = tracks[trackIdx];
+        if (track.isPlaying) track.pause();
+        else track.start();
+        renderTrackPlayButton(trackIdx);
+        updateStatus();
+        saveProjectToDB();
+    }
+
+    function trackStopHandler(e) {
+        const trackIdx = parseInt(e.currentTarget.getAttribute('data-track'));
+        tracks[trackIdx].stop();
+        renderTrackPlayButton(trackIdx);
+        updateStatus();
+        saveProjectToDB();
+    }
+
+    function trackVolumeHandler(e) {
+        const trackIdx = parseInt(e.currentTarget.getAttribute('data-track'));
+        const val = parseInt(e.currentTarget.value, 10) / 100;
+        tracks[trackIdx].setGroupVolume(val);
+        saveProjectToDB();
+    }
+
+    function trackMuteHandler(e) {
+        const trackIdx = parseInt(e.currentTarget.getAttribute('data-track'));
+        const track = tracks[trackIdx];
+        track.setMuted(!track.muted);
+        const btn = e.currentTarget;
+        btn.textContent = track.muted ? '🔊' : '🔇';
+        saveProjectToDB();
+    }
+
+    async function deleteTrackHandler(e) {
+        const trackIdx = parseInt(e.currentTarget.getAttribute('data-track'));
+        const track = tracks[trackIdx];
+        track.stop();
+        for (let clip of track.clips) {
+            if (clip.fileId) await deleteFileFromDB(clip.fileId);
+            if (clip.blobUrl) URL.revokeObjectURL(clip.blobUrl);
+        }
+        tracks.splice(trackIdx, 1);
+        if (tracks.length === 0) {
+            const newTrack = new TrackGroup(nextTrackId++, '音轨 1', 0.7, false);
+            tracks.push(newTrack);
+        }
+        renderAllTracks();
+        await saveProjectToDB();
+    }
+
+    function renderTrackPlayButton(trackIdx) {
+        const btn = document.querySelector(`.play-pause-track[data-track="${trackIdx}"]`);
+        if (btn && tracks[trackIdx]) {
+            btn.textContent = tracks[trackIdx].isPlaying ? '⏸️' : '▶️';
+        }
+    }
+
+    function attachClipEvents(trackIdx) {
+        document.querySelectorAll(`.clip-volume[data-track="${trackIdx}"]`).forEach(slider => {
+            slider.removeEventListener('input', clipVolumeHandler);
+            slider.addEventListener('input', clipVolumeHandler);
+        });
+        document.querySelectorAll(`.clip-remove[data-track="${trackIdx}"]`).forEach(btn => {
+            btn.removeEventListener('click', clipRemoveHandler);
+            btn.addEventListener('click', clipRemoveHandler);
+        });
+    }
+
+    async function clipVolumeHandler(e) {
+        const trackIdx = parseInt(e.currentTarget.getAttribute('data-track'));
+        const clipIdx = parseInt(e.currentTarget.getAttribute('data-clip'));
+        const val = parseInt(e.currentTarget.value, 10) / 100;
+        const clip = tracks[trackIdx]?.clips[clipIdx];
+        if (clip) {
+            clip.setVolume(val);
+            tracks[trackIdx].applyGroupVolume();
+            await saveProjectToDB();
+        }
+    }
+
+    async function clipRemoveHandler(e) {
+        const trackIdx = parseInt(e.currentTarget.getAttribute('data-track'));
+        const clipIdx = parseInt(e.currentTarget.getAttribute('data-clip'));
+        const track = tracks[trackIdx];
+        if (track) {
+            const clip = track.clips[clipIdx];
+            if (clip.fileId) await deleteFileFromDB(clip.fileId);
+            if (clip.blobUrl) URL.revokeObjectURL(clip.blobUrl);
+            track.removeClip(clipIdx);
+            renderTrackClips(trackIdx);
+            await saveProjectToDB();
+        }
+    }
+
+    // 拖拽排序
+    let dragSource = { trackIdx: null, clipIdx: null };
+    
+    function attachDragEventsForTrack(trackIdx) {
+        const clips = document.querySelectorAll(`.clip-item[data-track="${trackIdx}"]`);
+        clips.forEach(clip => {
+            clip.removeEventListener('dragstart', dragStart);
+            clip.removeEventListener('dragend', dragEnd);
+            clip.removeEventListener('dragover', dragOver);
+            clip.removeEventListener('dragleave', dragLeave);
+            clip.removeEventListener('drop', drop);
+            clip.addEventListener('dragstart', dragStart);
+            clip.addEventListener('dragend', dragEnd);
+            clip.addEventListener('dragover', dragOver);
+            clip.addEventListener('dragleave', dragLeave);
+            clip.addEventListener('drop', drop);
+        });
+    }
+
+    function dragStart(e) {
+        const target = e.currentTarget;
+        dragSource.trackIdx = parseInt(target.getAttribute('data-track'));
+        dragSource.clipIdx = parseInt(target.getAttribute('data-clip-idx'));
+        e.dataTransfer.setData('text/plain', `${dragSource.trackIdx},${dragSource.clipIdx}`);
+        e.dataTransfer.effectAllowed = 'move';
+        target.style.opacity = '0.5';
+    }
+
+    function dragEnd(e) {
+        e.currentTarget.style.opacity = '';
+        dragSource = { trackIdx: null, clipIdx: null };
+        document.querySelectorAll('.clip-item').forEach(el => el.classList.remove('drag-over'));
+    }
+
+    function dragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        e.currentTarget.classList.add('drag-over');
+    }
+
+    function dragLeave(e) {
+        e.currentTarget.classList.remove('drag-over');
+    }
+
+    async function drop(e) {
+        e.preventDefault();
+        const target = e.currentTarget;
+        target.classList.remove('drag-over');
+        if (dragSource.trackIdx === null || dragSource.clipIdx === null) return;
+        
+        const targetTrackIdx = parseInt(target.getAttribute('data-track'));
+        const targetClipIdx = parseInt(target.getAttribute('data-clip-idx'));
+        const sourceTrack = tracks[dragSource.trackIdx];
+        const targetTrack = tracks[targetTrackIdx];
+        
+        if (!sourceTrack || !targetTrack) return;
+        
+        const sourceClip = sourceTrack.clips[dragSource.clipIdx];
+        if (!sourceClip) return;
+        
+        sourceTrack.clips.splice(dragSource.clipIdx, 1);
+        let newIdx = targetClipIdx;
+        if (targetTrackIdx === dragSource.trackIdx && targetClipIdx > dragSource.clipIdx) newIdx--;
+        targetTrack.clips.splice(newIdx, 0, sourceClip);
+        
+        for (let t of tracks) {
+            if (t.isPlaying) {
+                t.stop();
+                t.start();
+            }
+        }
+        
+        renderTrackClips(dragSource.trackIdx);
+        if (dragSource.trackIdx !== targetTrackIdx) renderTrackClips(targetTrackIdx);
+        
+        await saveProjectToDB();
+        dragSource = { trackIdx: null, clipIdx: null };
+    }
+
+    // 全局功能
+    function playAll() { tracks.forEach(t => { if (t.clips.length) t.start(); }); renderAllTracks(); saveProjectToDB(); }
+    function pauseAll() { tracks.forEach(t => t.pause()); renderAllTracks(); saveProjectToDB(); }
+    async function clearAll() {
+        for (let track of tracks) {
+            track.stop();
+            for (let clip of track.clips) {
+                if (clip.fileId) await deleteFileFromDB(clip.fileId);
+                if (clip.blobUrl) URL.revokeObjectURL(clip.blobUrl);
+            }
+        }
+        tracks = [];
+        const defaultTrack = new TrackGroup(nextTrackId++, '音轨 1', 0.7, false);
+        tracks.push(defaultTrack);
+        renderAllTracks();
+        await saveProjectToDB();
+    }
+    function muteAll() { tracks.forEach(t => t.setMuted(true)); renderAllTracks(); saveProjectToDB(); }
+    function unmuteAll() { tracks.forEach(t => t.setMuted(false)); renderAllTracks(); saveProjectToDB(); }
+    function addNewTrack() {
+        const newTrack = new TrackGroup(nextTrackId++, `音轨 ${nextTrackId}`, 0.7, false);
+        tracks.push(newTrack);
+        renderAllTracks();
+        saveProjectToDB();
+    }
+    function updateStatus(msg) {
+        const totalClips = tracks.reduce((s, t) => s + t.clips.length, 0);
+        const statusSpan = document.getElementById('statusText');
+        if (statusSpan) {
+            statusSpan.innerHTML = msg ? `💾 ${msg} | 🎵 ${totalClips} 片段 | ${tracks.length} 音轨` : `💾 自动保存 | 🎵 ${totalClips} 片段 | ${tracks.length} 音轨`;
+        }
+    }
+    function escapeHtml(str) { return String(str).replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m] || m)); }
+
+    // 文件选择
+    let currentFileTargetTrack = 0;
+    document.getElementById('globalFileInput').addEventListener('change', async (e) => {
+        if (e.target.files.length) {
+            await addFilesToTrack(currentFileTargetTrack, Array.from(e.target.files));
+        }
+        e.target.value = '';
+    });
+    document.getElementById('addToSelectedLabel').addEventListener('click', () => {
+        currentFileTargetTrack = selectedTrackIndex;
+        document.getElementById('globalFileInput').click();
+    });
+
+    // 监听选中音轨变化 (点击音轨头部任意地方选中)
+    document.addEventListener('click', (e) => {
+        const trackCard = e.target.closest('.track-card');
+        if (trackCard) {
+            const idx = trackCard.getAttribute('data-track-index');
+            if (idx !== null) selectedTrackIndex = parseInt(idx);
+        }
+    });
+
+    // 初始化
+    window.addEventListener('DOMContentLoaded', async () => {
+        await openDB();
+        await restoreFullProject();
+        document.getElementById('addTrackBtn').onclick = addNewTrack;
+        document.getElementById('playAllBtn').onclick = playAll;
+        document.getElementById('pauseAllBtn').onclick = pauseAll;
+        document.getElementById('clearAllBtn').onclick = clearAll;
+        document.getElementById('muteAllBtn').onclick = muteAll;
+        document.getElementById('unmuteAllBtn').onclick = unmuteAll;
+        setInterval(() => updateStatus(), 3000);
+    });
+</script>
+</body>
+</html>
